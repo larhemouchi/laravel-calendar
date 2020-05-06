@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-10 mx-auto my-4">
-            <div id='calendar'></div>  
+            <div id='calendar'></div>
         </div>
     </div>
 @endsection
@@ -24,7 +24,8 @@
                 selectable: true,
                 select : function(selectionInfo){ //trigger select event
                     let title = prompt("Entrer le titre de l'événement : ");
-                    let formatted_start_date = selectionInfo.start.getFullYear() + "-" + (selectionInfo.start.getMonth() + 1) + "-" + selectionInfo.start.getDate() + " " + selectionInfo.start.getHours() + ":" + selectionInfo.start.getMinutes() + ":" + selectionInfo.start.getSeconds(); 
+                    let nom_service = prompt("Entrer le nom de service : ");
+                    let formatted_start_date = selectionInfo.start.getFullYear() + "-" + (selectionInfo.start.getMonth() + 1) + "-" + selectionInfo.start.getDate() + " " + selectionInfo.start.getHours() + ":" + selectionInfo.start.getMinutes() + ":" + selectionInfo.start.getSeconds();
                     let formatted_end_date = selectionInfo.end.getFullYear() + "-" + (selectionInfo.end.getMonth() + 1) + "-" + selectionInfo.end.getDate() + " " + selectionInfo.end.getHours() + ":" + selectionInfo.end.getMinutes() + ":" + selectionInfo.end.getSeconds();
                     $.ajaxSetup({
                         headers: {
@@ -35,8 +36,9 @@
                         type:'POST',
                         url : "/events",
                         data:{
-                            title:title, 
-                            start:formatted_start_date, 
+                            title:title,
+                            nom_service:nom_service,
+                            start:formatted_start_date,
                             end:formatted_end_date
                         },
                         success:function(){
@@ -96,7 +98,7 @@
                     })
                 },
                 eventDrop: function(info) { //trigger drop event
-                    let formatted_start_date = info.event.start.getFullYear() + "-" + (info.event.start.getMonth() + 1) + "-" + info.event.start.getDate() + " " + info.event.start.getHours() + ":" + info.event.start.getMinutes() + ":" + info.event.start.getSeconds(); 
+                    let formatted_start_date = info.event.start.getFullYear() + "-" + (info.event.start.getMonth() + 1) + "-" + info.event.start.getDate() + " " + info.event.start.getHours() + ":" + info.event.start.getMinutes() + ":" + info.event.start.getSeconds();
                     let formatted_end_date = info.event.end.getFullYear() + "-" + (info.event.end.getMonth() + 1) + "-" + info.event.end.getDate() + " " + info.event.end.getHours() + ":" + info.event.end.getMinutes() + ":" + info.event.end.getSeconds();
                     $.ajaxSetup({
                         headers: {
@@ -107,8 +109,9 @@
                         type:'PUT',
                         url : "/events/" + info.event.title,
                         data:{
-                            title:info.event.title, 
-                            start:formatted_start_date, 
+                            title:info.event.title,
+                            nom_service:info.event.nom_service,
+                            start:formatted_start_date,
                             end:formatted_end_date
                         },
                         success:function(){
@@ -123,7 +126,7 @@
                     });
                 },
                 eventResize : function(eventResizeInfo){//trigger event resize
-                    let formatted_start_date = eventResizeInfo.event.start.getFullYear() + "-" + (eventResizeInfo.event.start.getMonth() + 1) + "-" + eventResizeInfo.event.start.getDate() + " " + eventResizeInfo.event.start.getHours() + ":" + eventResizeInfo.event.start.getMinutes() + ":" + eventResizeInfo.event.start.getSeconds(); 
+                    let formatted_start_date = eventResizeInfo.event.start.getFullYear() + "-" + (eventResizeInfo.event.start.getMonth() + 1) + "-" + eventResizeInfo.event.start.getDate() + " " + eventResizeInfo.event.start.getHours() + ":" + eventResizeInfo.event.start.getMinutes() + ":" + eventResizeInfo.event.start.getSeconds();
                     let formatted_end_date = eventResizeInfo.event.end.getFullYear() + "-" + (eventResizeInfo.event.end.getMonth() + 1) + "-" + eventResizeInfo.event.end.getDate() + " " + eventResizeInfo.event.end.getHours() + ":" + eventResizeInfo.event.end.getMinutes() + ":" + eventResizeInfo.event.end.getSeconds();
                     $.ajaxSetup({
                         headers: {
@@ -134,8 +137,9 @@
                         type:'PUT',
                         url : "/events/" + eventResizeInfo.event.title,
                         data:{
-                            title:eventResizeInfo.event.title, 
-                            start:formatted_start_date, 
+                            title:eventResizeInfo.event.title,
+                            nom_service:eventResizeInfo.event.nom_service,
+                            start:formatted_start_date,
                             end:formatted_end_date
                         },
                         success:function(){
@@ -150,7 +154,7 @@
                     });
                 }
             });
-            calendar.setOption('locale', 'fr');           
+            calendar.setOption('locale', 'fr');
             calendar.render();
             document.querySelector('.fc-dayGridMonth-button').innerHTML = "Mois";
             document.querySelector('.fc-dayGridWeek-button').innerHTML = "Semaine";

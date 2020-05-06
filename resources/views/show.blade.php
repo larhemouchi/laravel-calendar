@@ -10,6 +10,9 @@
                             <span class="text-primary font-weight-bold">Titre : {{$event->title}}</span>
                         </li>
                         <li class="list-group-item">
+                            <span class="text-primary font-weight-bold">Nom de service : {{$event->nom_service}}</span>
+                        </li>
+                        <li class="list-group-item">
                             <span class="text-success font-weight-bold">Date début : {{$event->start_date}}</span>
                         </li>
                         <li class="list-group-item">

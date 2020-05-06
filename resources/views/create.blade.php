@@ -19,6 +19,12 @@
                                     </div>
                                 </fieldset>
                                 <fieldset class="form-group row">
+                                    <legend class="col-form-legend col-sm-1-12">Nom de service</legend>
+                                    <div class="col-sm-1-12">
+                                        <input type="text" class="form-control" name="nom_service" id="title" placeholder="nom_service*">
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group row">
                                     <legend class="col-form-legend col-sm-1-12">Date Début</legend>
                                     <div class="col-sm-1-12">
                                         <input type="date" class="form-control" name="start_date" id="start_date" placeholder="Date Début*">

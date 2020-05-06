@@ -23,6 +23,7 @@ class EventController extends Controller
         foreach($events as $event){
             $data = [
                 "title" => $event->title,
+                "nom_service" => $event->nom_service,
                 "start" => $event->start_date,
                 "end" => $event->end_date,
                 "textColor" => "white"
@@ -54,6 +55,7 @@ class EventController extends Controller
         //
         Event::create([
             "title" => $request->title,
+            "nom_service" => $request->nom_service,
             "start_date" => $request->start,
             "end_date" => $request->end
         ]);
