@@ -1,5 +1,8 @@
 <?php
 
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,4 +17,5 @@
 Route::get('/', function () {
     return view('home');
 });
-Route::resource('/events','EventController');
+Route::resource('/events', 'EventController');
+Route::get('/events/remove/{id}', 'EventController@remove')->name('events.remove');

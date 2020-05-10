@@ -18,9 +18,10 @@ class EventController extends Controller
         return $this->eventsToArray(Event::all());
     }
 
-    public function eventsToArray($events){
+    public function eventsToArray($events)
+    {
         $eventsArray = [];
-        foreach($events as $event){
+        foreach ($events as $event) {
             $data = [
                 "title" => $event->title,
                 "nom_service" => $event->nom_service,
@@ -28,7 +29,7 @@ class EventController extends Controller
                 "end" => $event->end_date,
                 "textColor" => "white"
             ];
-            array_push($eventsArray,$data);
+            array_push($eventsArray, $data);
         }
         return response()->json($eventsArray);
     }
@@ -55,11 +56,12 @@ class EventController extends Controller
         //
         Event::create([
             "title" => $request->title,
-            "nom_service" => $request->nom_service,
+            //  "nom_service" => $request->nom_service,
             "start_date" => $request->start,
             "end_date" => $request->end
         ]);
-        return response()->json(['success'=>'added']);
+        return response()->json(['success' => 'added']);
+        //return redirect('/');
     }
 
     /**
@@ -70,8 +72,17 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
-        return view('show')->withEvent($event);
+
+        //return response('return response');
+
+        $garde_id = request('garde_id');
+
+        $garde = Event::where(['title' => $garde_id])->get()->first();
+
+        return response()->json($garde);
+
+        //return view('show')->withEvent($event);
+
     }
 
     /**
@@ -99,7 +110,7 @@ class EventController extends Controller
             "start_date" => $request->start,
             "end_date" => $request->end
         ]);
-        return response()->json(['success'=>'updated']);
+        return response()->json(['success' => 'updated']);
     }
 
     /**
@@ -108,10 +119,22 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
+
+
+    public function remove($id)
+    {
+        $event = Event::where(['title' => $id])->get()->first();
+
+        $event->delete();
+
+        return response()->json(['success' => 'deleted']);
+    }
+    /*
     public function destroy(Event $event)
     {
         //
         $event->delete();
-        return response()->json(['success'=>'deleted']);
-    }
+
+        return response()->json(['success' => 'deleted']);
+    }*/
 }
